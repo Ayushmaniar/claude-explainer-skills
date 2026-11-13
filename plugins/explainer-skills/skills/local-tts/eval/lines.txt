@@ -1,0 +1,3 @@
+Ask ChatGPT to price out a team plan, and instead of a paragraph, you get a working interface. A slider. A live price. Drag it, and the number updates instantly.
+OpenAI calls this Intelligent UI. Days after launch, Rahbee Shanker Gooha and the team at Thesis took it apart. They recorded the network traffic, read the client code, and even rebuilt the compiler, byte for byte.
+Two: expressions are wrapped in D I L safe. If one throws an error, it removes one element, instead of crashing the whole render.

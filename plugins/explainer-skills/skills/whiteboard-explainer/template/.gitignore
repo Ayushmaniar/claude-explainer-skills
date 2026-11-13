@@ -1,0 +1,17 @@
+# build output
+/target/
+# generated while working on a video (rebuilt by the scripts)
+/audio/
+/narration/cache/
+/narration/narration_raw.wav
+/narration/SCRIPT.md
+/narration/WORDS.md
+/narration/audit*.json
+/check/
+/frames/
+/out/
+/assets/
+__pycache__/
+*.log
+# the host's frames (downloaded with tools/get_pet.py; check the artwork's rights before committing them)
+/sprites/*.png

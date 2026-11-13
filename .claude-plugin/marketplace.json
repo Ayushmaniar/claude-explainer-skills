@@ -1,0 +1,17 @@
+{
+  "name": "explainer-skills",
+  "owner": { "name": "Ayush Maniar" },
+  "metadata": {
+    "description": "Claude Code skills for narrated, hand-drawn whiteboard explainer videos with a free local voice."
+  },
+  "plugins": [
+    {
+      "name": "explainer-skills",
+      "source": "./plugins/explainer-skills",
+      "description": "whiteboard-explainer (long-form, narration-synced whiteboard videos built with fframes) and local-tts (Qwen3-TTS on your own GPU, plus .srt subtitles).",
+      "version": "1.0.0",
+      "license": "MIT",
+      "keywords": ["video", "explainer", "tts", "fframes", "narration", "subtitles"]
+    }
+  ]
+}

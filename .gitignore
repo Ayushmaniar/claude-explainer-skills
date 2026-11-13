@@ -1,0 +1,9 @@
+target/
+__pycache__/
+*.pyc
+*.log
+/out/
+**/narration/cache/
+**/audio/
+**/check/
+*.mp4

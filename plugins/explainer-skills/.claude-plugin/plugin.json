@@ -1,0 +1,8 @@
+{
+  "name": "explainer-skills",
+  "version": "1.0.0",
+  "description": "whiteboard-explainer (long-form, narration-synced whiteboard videos built with fframes) and local-tts (Qwen3-TTS on your own GPU, plus .srt subtitles).",
+  "author": { "name": "Ayush Maniar" },
+  "license": "MIT",
+  "keywords": ["video", "explainer", "tts", "fframes", "narration", "subtitles"]
+}

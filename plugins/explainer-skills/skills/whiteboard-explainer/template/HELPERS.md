@@ -12,7 +12,7 @@ handwriting writes itself), and each scene is built up progressively on an empty
 ## Where things are
 - Your work copy: `<absolute path>/work/<group>/` (a full copy of the video project). **Edit only
   `src/s_<group>.rs` in your work copy**, and in it only the functions you were given. Never edit the main
-  project, nor kit.rs / objs.rs / lib.rs / duck.rs / cues.rs / figs.rs. If you need a helper, write a private
+  project, nor kit.rs / objs.rs / lib.rs / cues.rs / figs.rs. If you need a helper, write a private
   `fn` inside your own file.
 - `STORYBOARD.md`: the plan for every scene. Read the top part (colours, recurring objects, figures) and your
   scenes' sections. It is a plan, not a contract: improve layouts if needed, but keep the meanings, the colours
@@ -50,7 +50,7 @@ handwriting writes itself), and each scene is built up progressively on an empty
   computing it. Labels are 1-6 words (max ~8), lowercase, telegraphic.
 
 ## Hard rules (the lead will send it back if you break these)
-- Canvas 1920x1080. Keep **x < 760, y < 150** free (chapter chip) and **x > 1690, y > 900** free (the host).
+- Canvas 1920x1080. Keep **x < 760, y < 150** free (chapter chip).
   Use the space **x 140..1780, y 180..930**: content must fill it. A frame whose lower half is empty, or whose
   drawing sits in a small cluster, is wrong.
 - **Text at least 32 px** for anything the viewer must read (28 px only for tiny tags inside a diagram); scene
@@ -83,7 +83,7 @@ $B frame "<Scene>@end" "<Scene>@50%" -o check           # full-size frames
 $B frame "<Scene>@end" --crop 900,300,700,500 -o check  # zoomed crop to check small labels
 ```
 `<Scene>` is the scene name as in narration/script.py. Then **look at the PNGs** (the strip and the `@end` frame
-at full size) and fix: overlaps, text running off the canvas or into the chip/host areas, tiny text, empty
+at full size) and fix: overlaps, text running off the canvas or into the chip area, tiny text, empty
 stretches, a mostly empty canvas, things appearing late. If a frame shows the placeholder (scene name + narration
 lines), your build is stale: `touch src/lib.rs` and rebuild.
 **Budget: at most 3 build-and-look rounds per scene.** Then stop and list any leftover doubts in your reply; the

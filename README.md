@@ -5,7 +5,7 @@ long, narrated, hand-drawn explainer video, with a free voice that runs on your 
 
 | Skill | What it does |
 |---|---|
-| **whiteboard-explainer** | 5-20 minute explainer videos in a hand-drawn whiteboard style. Every label, underline, circle and figure is drawn on the word that names it, slides build up as the narrator speaks, the paper's own figures are annotated on screen, and there are chapter chips, hard multiple-choice quizzes and a small animated host. Built with [fframes](https://github.com/dmtrKovalenko/fframes) (Rust). Ships a starter project in `template/`. |
+| **whiteboard-explainer** | 5-20 minute explainer videos in a hand-drawn whiteboard style. Every label, underline, circle and figure is drawn on the word that names it, slides build up as the narrator speaks, the paper's own figures are annotated on screen, and there are chapter chips, hard multiple-choice quizzes. Built with [fframes](https://github.com/dmtrKovalenko/fframes) (Rust). Ships a starter project in `template/`. |
 | **local-tts** | Human-sounding text-to-speech on your own GPU (or CPU) with no API cost: Qwen3-TTS 1.7B CustomVoice (voice "aiden", 8-bit GGUF) run by [qwentts.cpp](https://github.com/ServeurpersoCom/qwentts.cpp). Also writes `.srt` subtitles from the known line timings and has a routine for testing newer TTS models. |
 
 ## Install

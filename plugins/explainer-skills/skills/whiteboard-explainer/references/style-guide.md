@@ -100,8 +100,9 @@ Visual onset relative to the start of its spoken word:
   harness wrapper, the desk, the drawer, the to-do list, the toolbox vs terminal) with
   ✓ / ✗ / ★ / "depends" marks, in the order spoken. Then the fine print as stamps, and a
   handwritten "thanks for watching".
-- The host (a Codex-pet sprite) sits in the bottom-right corner, bobbing with the voice; bigger in the cold
-  open, the quizzes and the outro.
+- **No host or mascot.** No character, avatar or pet sits on screen: the drawing is the presenter.
+  A decoration that appears in every scene whether or not it means anything only distracts and takes
+  space from the content. Use the whole board for the explanation.
 
 ## 6. Quizzes: hard, accurate multiple choice
 Quizzes must be **difficult but strictly accurate MCQs**. A wrong answer key

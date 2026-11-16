@@ -9,7 +9,6 @@ use crate::objs::*;
 
 /// Cold open: a sorted list of a million names, the yes/no question you may ask, "how many questions?",
 /// the surprising number (20). Then everything shrinks aside and the title is written.
-/// The host stands big bottom-right in this scene (x > 1600, y > 800): keep that corner clear.
 pub fn hook<'a>(t: f32, c: &SceneCues) -> Svgr<'a> {
     let mut a: Vec<Svgr<'a>> = Vec::new();
     // b0: the list, drawn as a long sheet of names, A at the top and Z at the bottom

@@ -2,7 +2,7 @@
 
     python -I narration/glitch.py out.mp4      (needs ffmpeg on PATH, or FFMPEG / FFMPEG_DIR as in tts.py)
 
-Checks the encoded file at 480x270. The host's blinks and rolling counters give some harmless events; look at the
+Checks the encoded file at 480x270. Rolling counters and playing clips give some harmless events; look at the
 flagged frames (`<binary> frame <seconds>s`) before deciding. Prints (frame, frames until it snaps back, changed
 pixels, y range) for each event.
 """

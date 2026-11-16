@@ -13,5 +13,3 @@
 /assets/
 __pycache__/
 *.log
-# the host's frames (downloaded with tools/get_pet.py; check the artwork's rights before committing them)
-/sprites/*.png

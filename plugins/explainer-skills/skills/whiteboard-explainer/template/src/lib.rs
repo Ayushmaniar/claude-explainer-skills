@@ -9,10 +9,8 @@
 //! - `kit.rs`     drawing kit: strokes, handwriting, camera, paper cards, widgets, icons
 //! - `objs.rs`    recurring objects (the quiz board, cells, code/chat/quote cards, plots) + this video's own
 //! - `t3d.rs`     optional 3D blocks (fframes 1.3 three_d): cubes, camera insets, projected labels
-//! - `duck.rs`    the host (a Codex pet sprite, if `sprites/` has one) and its schedule
 //! - `s_*.rs`     the scenes, one function per scene: `fn(t, c) -> Svgr`
-//! - generated:   `cues.rs` (build_vo.py / est_cues.py), `envelope.rs` (envelope.py), `figs.rs`
-//!                (tools/prep_figs.py), `metrics.rs` (tools/font_metrics.py)
+//! - generated:   `cues.rs` (build_vo.py / est_cues.py), `figs.rs` (tools/prep_figs.py), `metrics.rs` (tools/font_metrics.py)
 use std::collections::HashMap;
 use std::sync::{Arc, OnceLock};
 
@@ -22,8 +20,6 @@ use fframes::{
 };
 
 pub mod cues;
-pub mod duck;
-pub mod envelope;
 pub mod figs;
 pub mod kit;
 pub mod metrics;
@@ -86,16 +82,14 @@ pub fn scene(name: &str) -> Option<&'static SceneCues> {
 
 // ================================================================ images
 
-/// Every image (figures and sprites), loaded once from the media provider.
+/// Every figure image, loaded once from the media provider.
 static IMAGES: OnceLock<HashMap<String, Arc<fframes::usvgr::PreloadedImageData>>> = OnceLock::new();
 
 fn init_images(ctx: &FFramesContext<'_, '_>) {
     IMAGES.get_or_init(|| {
         let mut m = HashMap::new();
-        // Only ask for files that exist, so an empty `sprites/` (no host) or a missing figure is not an error.
-        let figs = figs::FIGS.iter().map(|f| ("figs", f.0.to_string()));
-        let sprites = duck::sprite_names().into_iter().map(|n| ("sprites", n));
-        for (dir, n) in figs.chain(sprites) {
+        // Only ask for files that exist, so a missing figure is not an error.
+        for (dir, n) in figs::FIGS.iter().map(|f| ("figs", f.0.to_string())) {
             let file = format!("{n}.png");
             if !std::path::Path::new(dir).join(&file).is_file() {
                 continue;
@@ -108,7 +102,7 @@ fn init_images(ctx: &FFramesContext<'_, '_>) {
     });
 }
 
-/// An image by name (without ".png"): a figure from `figs/` or a sprite from `sprites/`. None if missing.
+/// An image by name (without ".png"): a figure from `figs/`. None if missing.
 pub fn image(name: &str) -> Option<Arc<fframes::usvgr::PreloadedImageData>> {
     IMAGES.get()?.get(name).cloned()
 }
@@ -263,7 +257,6 @@ impl Video for ExplainerVideo {
                 <rect width="1920" height="1080" fill="url(#dots)" />
                 {ctx.render_scenes(&frame)}
                 {chip(g)}
-                {duck::host(g)}
             </svg>
         )
     }

@@ -5,8 +5,8 @@ use explainer_video::{ExplainerMedia, ExplainerVideo};
 use fframes::{CombinedMediaProvider, EncoderOptions, MediaDirectory, MediaProvider, RenderOptions, StaticMediaProvider, cli};
 use std::process::ExitCode;
 
-/// Reads a media folder at runtime. `sprites/` and `figs/` may be empty or missing (no host, no figures):
-/// they are created empty then, and the video renders without them.
+/// Reads a media folder at runtime. `figs/` may be empty or missing (no figures): it is created empty then,
+/// and the video renders without figures.
 fn folder(name: &str) -> MediaDirectory {
     if !std::path::Path::new(name).is_dir() {
         std::fs::create_dir_all(name).unwrap_or_else(|e| panic!("can't create the {name}/ folder: {e}"));
@@ -16,8 +16,7 @@ fn folder(name: &str) -> MediaDirectory {
 
 fn main() -> ExitCode {
     let args = cli::parse::<cli::NoArgs>();
-    // Fonts are compiled in from `media/`; the narration (`audio/`), the host's frames (`sprites/`) and the
-    // figures (`figs/`) load at runtime from the project folder (run the binary from there).
+    // Fonts are compiled in from `media/`; the narration (`audio/`) and the figures (`figs/`) load at runtime from the project folder (run the binary from there).
     let media = ExplainerMedia::prepare().expect("media");
     if !std::path::Path::new("audio/narration.wav").is_file() {
         eprintln!("audio/narration.wav is missing: run narration/build_vo.py (or narration/est_cues.py for a silent draft)");
@@ -25,11 +24,9 @@ fn main() -> ExitCode {
     }
     let audio_dir = folder("audio");
     let audio = audio_dir.process_media_source().expect("audio media");
-    let sprite_dir = folder("sprites");
-    let sprites = sprite_dir.process_media_source().expect("sprite media");
     let fig_dir = folder("figs");
     let figs = fig_dir.process_media_source().expect("figure media");
-    let all_media = CombinedMediaProvider::from([&media as &dyn MediaProvider, &audio, &sprites, &figs]);
+    let all_media = CombinedMediaProvider::from([&media as &dyn MediaProvider, &audio, &figs]);
     let video = ExplainerVideo::new();
     let options = RenderOptions {
         media: Some(&all_media),

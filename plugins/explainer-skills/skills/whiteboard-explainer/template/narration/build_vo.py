@@ -8,8 +8,8 @@ settings + text; then faster-whisper finds when each word is spoken inside the c
 to the script text, so scenes can start a drawing on the exact word that names it. Over-long pauses inside a line
 are shortened (`shape`), so the voice never stops mid-thought for as long as the gap between lines.
 
-Writes audio/narration.wav, src/cues.rs (scene starts, durations, beat starts/ends and every word's time),
-src/envelope.rs (voice loudness per frame, for the host's talking bob) and narration/SCRIPT.md.
+Writes audio/narration.wav, src/cues.rs (scene starts, durations, beat starts/ends and every word's time)
+and narration/SCRIPT.md.
 Then: narration/words.py (checks every c.w(..) key), and later narration/make_srt.py for subtitles.
 
 If another app is using the GPU: GGML_BACKEND=CPU (TTS on the CPU, ~4x slower) and WHISPER_DEVICE=cpu.
@@ -22,7 +22,6 @@ import json
 import math
 import pathlib
 import re
-import runpy
 import subprocess
 import sys
 
@@ -302,6 +301,3 @@ rs.append("];\n")
 for name, start, dur, cues, *_ in scene_rows:
     print(f"{name:16s} {start:7.1f}s  +{dur:5.1f}s  beats={len(cues)}")
 print(f"TOTAL {total:.1f}s = {int(total // 60)}m{total % 60:04.1f}s; {shaped_s:.1f}s of over-long pauses removed")
-
-# The host's talking bob follows the new track.
-runpy.run_path(str(ROOT / "narration" / "envelope.py"), run_name="__main__")

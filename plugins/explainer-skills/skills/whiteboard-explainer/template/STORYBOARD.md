@@ -1,8 +1,7 @@
 # Storyboard: "Binary search, in about a minute" (the template's demo)
 
-~1.5 min, 5 scenes. Canvas 1920x1080. Content area x 140..1780, y 180..930. Keep x<760,y<150 free (chapter chip)
-and x>1690,y>900 free (the host, small, bottom-right; it stands bigger at x>1600,y>800 in Hook, the quiz and
-the outro). Notation `b3:"word"` = `c.w(3, "word")` (copy keys from narration/WORDS.md). On screen write the real
+~1.5 min, 5 scenes. Canvas 1920x1080. Content area x 140..1780, y 180..930. Keep x<760,y<150 free (chapter chip).
+Notation `b3:"word"` = `c.w(3, "word")` (copy keys from narration/WORDS.md). On screen write the real
 spellings and digits; the voice says "fifty-two", "one million".
 
 This file is the plan helpers implement. Make it concrete enough to place, not design: per element the trigger
@@ -73,4 +72,4 @@ b9:"tempting" "40 = checking one by one".
 - b0 start: "binary search" yellow 90 centred at (960, 260); a 7-cell `sorted_row` at (435, 380), cells 150.
 - b0:"middle": ring round the middle cell + "look"; b0:"half": left three cells dim, red brace, "drop half";
   b0:"repeat": mint curved arrow under the right half + "repeat".
-- b1:"thanks": "thanks for watching!" white 64 centred at (960, 820); the host waves.
+- b1:"thanks": "thanks for watching!" white 64 centred at (960, 820).

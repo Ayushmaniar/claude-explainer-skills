@@ -11,8 +11,8 @@
 //!   starts appearing. Before `t0` a helper returns `Svgr::empty()`; afterwards it stays on screen
 //!   (scenes are cleared by the hard cut to the next scene). Use `until(t, t1, ..)` to remove early.
 //! - Times come from the narration: `c.w(beat, "word")` is when that word starts (see `cues.rs`).
-//! - Coordinates are 1920x1080 canvas pixels. Keep the bottom-right corner (x > 1690, y > 900)
-//!   free: the host sprite lives there. Keep the top-left chip area (x < 700, y < 150) free.
+//! - Coordinates are 1920x1080 canvas pixels. Keep the top-left chip area (x < 700, y < 150)
+//!   free.
 use fframes::Svgr;
 
 use crate::figs::FIGS;

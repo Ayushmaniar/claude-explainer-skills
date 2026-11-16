@@ -1,6 +1,6 @@
 ---
 name: whiteboard-explainer
-description: Make a long-form (5-20 min) narrated explainer video of a paper, article or concept in a hand-drawn whiteboard style — every label, underline, circle and figure is drawn exactly on the word that names it, built up slide by slide, with the paper's own figures annotated on screen, chapter chips, hard multiple-choice quizzes and a small animated host. Use whenever the user asks for an explainer video, a video about a paper/arXiv link/blog post/concept, or "a video like the last one". Built with fframes (Rust; 1.3+ adds three.js-style 3D shots) plus the local-tts skill for the voice.
+description: Make a long-form (5-20 min) narrated explainer video of a paper, article or concept in a hand-drawn whiteboard style — every label, underline, circle and figure is drawn exactly on the word that names it, built up slide by slide, with the paper's own figures annotated on screen, chapter chips, hard multiple-choice quizzes. Use whenever the user asks for an explainer video, a video about a paper/arXiv link/blog post/concept, or "a video like the last one". Built with fframes (Rust; 1.3+ adds three.js-style 3D shots) plus the local-tts skill for the voice.
 ---
 
 # Whiteboard explainer videos
@@ -26,23 +26,20 @@ numpy, soundfile, librosa, faster-whisper and pillow installed. What is in it:
 - `src/objs.rs`: reusable objects (`mcq`, `grid`, `token`, `vecbar`, `hbar`, `code_panel`,
   `chat_card`, `quote_card`, `axes`/`trace`, `vec_arrow`, `photo`, ...) plus a "this video" section:
   put each video's recurring objects there so every scene draws them identically.
-- `src/duck.rs`: the host sprite (feet position, talking bob from the voice envelope, per-scene spots:
-  big in the cold open / quizzes / outro, small bottom-right otherwise). No sprites → no host.
 - `src/t3d.rs` (optional): immediate-mode cubes and `View3` for tensor/array 3D insets.
 - `narration/`: `script.py` (scenes → beats, `PAUSE` for quizzes), `tts.py` (voice settings; finds the
   local-tts `say.py`), `build_vo.py` (voice + per-line cache + pause shaping + tempo + faster-whisper
-  word alignment → `audio/narration.wav`, `src/cues.rs`, `src/envelope.rs`), `words.py` (checks every
+  word alignment → `audio/narration.wav`, `src/cues.rs`), `words.py` (checks every
   `c.w(...)` key, missing dispatch arms and leftover placeholders; writes WORDS.md), `est_cues.py`
   (provisional cues and a silent track before the voice exists), `audit_vo.py` / `tts_try.py`
   (pronunciation audit), `make_srt.py` (subtitles with a DISPLAY map, OVERRIDE and `--review`),
-  `envelope.py`, `glitch.py` (final-file check).
-- `tools/`: `prep_figs.py` (writes `src/figs.rs` from `figs/*.png`), `get_pet.py` (downloads a host
-  sprite), `font_metrics.py`, `make_demo_fig.py`, `lowprio.py` (run a job at idle priority).
+  `glitch.py` (final-file check).
+- `tools/`: `prep_figs.py` (writes `src/figs.rs` from `figs/*.png`), `font_metrics.py`, `make_demo_fig.py`, `lowprio.py` (run a job at idle priority).
 - `media/`: the fonts. Only media files may sit at its top level (`include_media_dir!` panics on
   others), so the licence texts live in `media/licenses/`.
 - `HELPERS.md`: the brief to give every scene helper (rules, file map, build-and-check loop).
 - `STORYBOARD.md`: the demo's storyboard, showing the level of detail helpers need.
-- `THIRD_PARTY.md`: font, sprite, fframes and FFmpeg licences.
+- `THIRD_PARTY.md`: font, fframes and FFmpeg licences.
 
 ## Requirements
 
@@ -53,11 +50,6 @@ numpy, soundfile, librosa, faster-whisper and pillow installed. What is in it:
   for both cargo and the built binary (without the DLLs it exits 127 silently when piped).
 - **Python 3.10+** with `faster-whisper` (word alignment, audit) and `numpy`.
 - The **local-tts** skill (same plugin) for the voice. A GPU helps a lot; everything also runs on a CPU.
-- A **host sprite** (optional): a Codex pet from github.com/gennadi-kuzmin/awesome-codex-pets
-  (192x208 cells). `python -I tools/get_pet.py --list`, then `python -I tools/get_pet.py <pet-id>`
-  downloads and slices one into `sprites/`. That repo's MIT licence covers its code; check each pet's
-  artwork rights before publishing a video. Pick a bright one (dark pets vanish on the black board).
-  With no sprite the video renders without a host.
 
 ## fframes version and the official skill
 
@@ -73,8 +65,7 @@ New in 1.3 and worth using:
 - **3D shots** (`fframes::three_d`): see the next section.
 - **Sharper checks**: `frame 3s --crop x,y,w,h` (a zoomed crop in video pixels, for touching strokes
   and small labels), `frame --ids` (outlines and names every element with an `id`), `strip 2s,5s,9s`
-  (chosen times side by side) and `inspect --pops` (finds things that pop in or out in one frame;
-  groups the host's blinks). `--pops` checks the frames, not the encoded mp4, so still run
+  (chosen times side by side) and `inspect --pops` (finds things that pop in or out in one frame). `--pops` checks the frames, not the encoded mp4, so still run
   `glitch.py` on the final file.
 - **Lottie**: feature `lottie`, `frame.play_lottie(ctx, "x.json", LottieOptions { .. })` for a
   ready-made animated icon. Hand-drawn kit strokes stay the default; use Lottie only when it matches
@@ -140,8 +131,7 @@ layer stack with a lifting layer, a hand label pinned to it, a paper card drawn 
      Give "Thanks for watching!" its own beat.
 3. **Storyboard** (`STORYBOARD.md`): per scene, which element appears on which trigger word, its rough
    position (x, y), size and colour, which figure/crop, and the recurring objects + colour meanings.
-   Concrete enough to implement, not design. Reserve the chip area (top-left) and the host area
-   (bottom-right).
+   Concrete enough to implement, not design. Reserve the chip area (top-left).
 4. **Voice**: `narration/build_vo.py` voices through the local-tts skill's `say.py`, found via
    `LOCAL_TTS_SAY`, then `~/.claude/skills/local-tts/`, then `~/.claude/plugins/**`. GPU busy?
    `GGML_BACKEND=CPU` and `WHISPER_DEVICE=cpu`. Cached per line; rewording a line
@@ -192,7 +182,7 @@ layer stack with a lifting layer, a hand label pinned to it, a paper card drawn 
   Skia/Vulkan video path was unreliable over long renders: `MaxPerformance` pasted bands of other
   frames into ~3% of frames and once deadlocked after the last frame; even `OnePipeline` pasted 1-px
   streaks into ~200 frames. Short ranges and single previews were clean, so it only shows on a full run.
-- **glitch.py** flags pixels that change and snap back within 1-4 frames at 480x270. Host blinks and
+- **glitch.py** flags pixels that change and snap back within 1-4 frames at 480x270. Rolling
   counters give ~20-30 harmless events; look at the flagged frames. Playing video clips trip it too.
 - **When the GPU is busy** (a game, another render), everything still runs on the CPU:
   `GGML_BACKEND=CPU` for the TTS (~4x slower), Whisper on the CPU, the CPU frame renderer. On Windows
@@ -211,8 +201,6 @@ layer stack with a lifting layer, a hand label pinned to it, a paper card drawn 
 - **Covers must be fully opaque and full width.** A backdrop that hides an earlier stage of a slide at
   opacity 0.92-0.99 leaves ghost text on a black board, and a narrow one leaks dimmed strokes at the
   edges. Start a backdrop on its first new element's word, not the beat start, or the board sits empty.
-- A scene that draws the host itself (e.g. walking the roadmap) needs `None` in duck.rs `spot`, or it
-  doubles.
 - Windows console is cp1252: print `ascii()` of strings that may hold unicode, or
   `sys.stdout.reconfigure(encoding="utf-8", errors="replace")` (`python -I` ignores PYTHONIOENCODING).
 - Regexes with `\b` written through a bash heredoc or `python -c` can become backspace characters:

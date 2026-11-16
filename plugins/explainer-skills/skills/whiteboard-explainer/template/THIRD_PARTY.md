@@ -33,15 +33,6 @@ The numbers are computed (floor(log2 n) + 1). It carries the same licence as the
 
 ## Not shipped: downloaded or installed by you
 
-### Host sprites (`sprites/`, via `tools/get_pet.py`)
-
-The host is a Codex pet from github.com/gennadi-kuzmin/awesome-codex-pets. The repository's `LICENSE` file is
-MIT (c) 2026 Gennadii Kuzmin, but its README states the licence as "Code and original documentation: MIT", and
-asks that pet artwork be original or used only with clear rights. It does not say the artwork itself is MIT.
-Because of that, the template ships no pet artwork. `tools/get_pet.py` downloads a pet into your project
-(`assets/<pet-id>/`, with a `SOURCE.md` note) and slices it. Check the rights of the pet you pick before you
-publish a video with it. Without sprites, the video renders without a host.
-
 ### fframes (Rust crate, fetched by Cargo)
 
 fframes (crates.io `fframes` 1.3.0 and its sub-crates `fframes-media`, `fframes_three_d`,
